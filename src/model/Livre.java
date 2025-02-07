@@ -24,6 +24,67 @@ public class Livre implements CSVSerializable<Livre> {
         this.ISBN = ISBN;
     }
 
+    public Livre() {}
+
+    // getters and setters
+
+    public String getTitre() {
+        return this.titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public String getAuteur() {
+        return this.auteur;
+    }
+
+    public void setAuteur(String auteur) {
+        this.auteur = auteur;
+    }
+
+    public String getCategorie() {
+        return this.categorie;
+    }
+
+    public void setCategorie(String categorie) {    
+        this.categorie = categorie;
+    }
+
+    public double getPrix() {
+        return this.prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+
+    public Date getDatePublication() {
+        return this.datePublication;
+    }
+
+    public void setDatePublication(Date datePublication) {
+        this.datePublication = datePublication;
+    }
+
+    public int getQuantiteEnStock() {
+        return this.quantiteEnStock;
+    }
+
+    public void setQuantiteEnStock(int quantiteEnStock) {
+        this.quantiteEnStock = quantiteEnStock;
+    }
+
+    public String getISBN() {
+        return this.ISBN;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+
     @Override
     public String toCSVString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -48,5 +109,18 @@ public class Livre implements CSVSerializable<Livre> {
         int quantiteEnStock = Integer.parseInt(values[5]);
         String ISBN = values[6];
         return new Livre(titre, auteur, categorie, prix, datePublication, quantiteEnStock, ISBN);
+    }
+
+    @Override
+    public String toString() {
+        return "Livre{" +
+                "titre='" + titre + '\'' +
+                ", auteur='" + auteur + '\'' +
+                ", categorie='" + categorie + '\'' +
+                ", prix=" + prix +
+                ", datePublication=" + datePublication +
+                ", quantiteEnStock=" + quantiteEnStock +
+                ", ISBN='" + ISBN + '\'' +
+                '}';
     }
 }
