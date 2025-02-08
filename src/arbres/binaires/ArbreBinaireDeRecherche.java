@@ -1,8 +1,8 @@
 package arbres.binaires;
 
-public interface ArbreBinaireDeRecherche <T extends Comparable<T>> extends ArbreBinaire  {
+public interface ArbreBinaireDeRecherche<T extends Comparable<T>> extends ArbreBinaire<T> {
 
-    Node searchNode(T key);
+    Node<T> searchNode(T key);
 
     void insertNode(T key);
 

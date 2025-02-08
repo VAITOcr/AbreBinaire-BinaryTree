@@ -44,9 +44,17 @@ public class Node<T extends Comparable<T>> {
         this.height = height;
     }
 
+    public void afficherInorder(Node<T> node) {
+        if (node != null) {
+            node.afficherInorder(node.getLeft());
+            System.out.println(node.getKey());
+            node.afficherInorder(node.getRight());
+        }
+    }
+
     @Override
     public String toString() {
-//        var key = this.getKey() != null ? this.getKey() : "null";
+        // var key = this.getKey() != null ? this.getKey() : "null";
         var gauche = this.getLeft() != null ? this.getLeft().getKey() : "null";
         var droite = this.getRight() != null ? this.getRight().getKey() : "null";
         return "\nLe Noeud " + this.getKey() + " a { gauche : " + gauche + ", droite: " + droite + "}";

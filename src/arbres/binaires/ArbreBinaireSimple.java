@@ -1,6 +1,6 @@
 package arbres.binaires;
 
-public class ArbreBinaireSimple  implements ArbreBinaire{
+public class ArbreBinaireSimple<T extends Comparable<T>> implements ArbreBinaire<T> {
     protected Node root;
 
     @Override
