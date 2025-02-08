@@ -4,21 +4,33 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVReader {
+public class CSVReader<T extends CSVSerializable<T>> {
 
-    public static <T extends CSVSerializable<T>> List<T> readEntity(String filePath, Class<T> entityClass)
-            throws Exception {
-        List<T> entites = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        String ligne;
+    private Class<T> entityClass;
 
-        reader.readLine(); // skip header
-        while ((ligne = reader.readLine()) != null) {
-            T entity = entityClass.getDeclaredConstructor().newInstance();
-            entites.add(entity.fromCSVString(ligne));
+    public CSVReader(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
+
+    public List<T> readEntity(String filepath) throws Exception {
+
+        List<T> entities = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            String nextLine;
+            boolean firstLine = true;
+
+            while ((nextLine = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
+                T entity = entityClass.getDeclaredConstructor(String[].class).newInstance((Object) nextLine.split(","));
+                entities.add(entity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        reader.close();
-        return entites;
+        return entities;
     }
 
 }
